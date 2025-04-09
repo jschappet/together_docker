@@ -98,11 +98,11 @@ COPY together-prod.socket /etc/systemd/system/together-prod.socket
 COPY jazz.server /home/together/.together/.server
 
 # Reload systemd to recognize the new files
-RUN systemctl daemon-reload
+#RUN systemctl daemon-reload
 
 # Enable the service and socket
-RUN systemctl enable together-prod.service together-prod.socket
-RUN systemctl start together-prod
+#RUN systemctl enable together-prod.service together-prod.socket
+#RUN systemctl start together-prod
 
 # Expose necessary ports
 EXPOSE 50000-50050 50100-50150 50200-50250 50300-50350 50400-50450 50500-50550 51000-51050
