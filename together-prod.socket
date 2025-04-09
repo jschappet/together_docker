@@ -1,0 +1,11 @@
+[Unit]
+Description=Together Prod Socket
+PartOf=together-prod.service
+
+[Socket]
+ListenStream=50500
+BindIPv6Only=both
+FreeBind=true
+
+[Install]
+WantedBy=sockets.target

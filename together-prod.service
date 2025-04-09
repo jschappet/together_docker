@@ -1,0 +1,14 @@
+[Unit]
+Description=Together Prod Service
+After=network.target together-prod.socket
+Requires=together-prod.socket
+
+[Service]
+Type=simple
+User=together
+Group=together
+ExecStart=/home/together/Devel/together/app/prod/binaries/prod/Together-Server
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
