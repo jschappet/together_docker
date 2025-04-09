@@ -84,19 +84,6 @@ RUN echo "export JAZCONF=prod" > .jaz && \
     ./jaz download && \
     ./jaz make -j 2 
 
-
-WORKDIR /home/together/.together/
-
-# TODO - Fix the multi line echo command
-RUN echo "(data jazz\n\
-\n\
-(version 1 4) \n\
-(import world.server)\n\
-\n\
-(form\n\
-  (<Server> host: \"*\" service: 50500)))" > .server
-
-#WORKDIR /home/together/Devel/together/worlds
  
 # Set up system configurations
 RUN echo "net.ipv4.tcp_keepalive_time=60" >> /etc/sysctl.conf && \
@@ -105,9 +92,10 @@ RUN echo "net.ipv4.tcp_keepalive_time=60" >> /etc/sysctl.conf && \
     echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf && \
     echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 
-# Copy systemd service and socket files
+# Copy systemd service and socket files, .server file
 COPY together-prod.service /etc/systemd/system/together-prod.service
 COPY together-prod.socket /etc/systemd/system/together-prod.socket
+COPY jazz.server /home/together/.together/.server
 
 # Reload systemd to recognize the new files
 RUN systemctl daemon-reload
